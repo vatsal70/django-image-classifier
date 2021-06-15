@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+  <form action={% url 'classImage' %} method='post' enctype="multipart/form-data">
+  {% csrf_token %}
+    <div class="form-group">
+      <label for="image_data">Example file input</label>
+      <input type="file" class="form-control-file"  name='image_data'>
+      <button type="submit" name="submit" class="btn btn-primary mb-2">Confirm</button>
+    </div>
+  </form>
+</div>
+
+
+<div class='container'>
+    {% if response %}
+        {% for item in response %}
+            {% for key, value in item.items %}
+                <p> {{ key }}: {{ value }} </p>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
